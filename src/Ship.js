@@ -1,6 +1,4 @@
 (function exportShip(){
-    const itinerary = require('../src/Itinerary');
-    const Port = require('../src/Port');
     class Ship {
         constructor(itinerary) {
             this.itinerary = itinerary;
@@ -10,8 +8,8 @@
         }
     setSail(){
             this.previousPort = this.currentPort;
-            this.currentPort.removeShip();
             this.currentPort = false;
+            this.previousPort.removeShip(this);
             
     }
     dock() {

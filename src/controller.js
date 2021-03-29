@@ -1,5 +1,4 @@
 (function exportController(){
-    const ship = require('../src/Ship')
     function Controller(ship){
         this.ship = ship,
         this.initialiseSea();
@@ -19,6 +18,18 @@
             `url('${backgrounds[backgroundIndex % backgrounds.length]}')`;
             backgroundIndex += 1;
         }, 1000);
+    };
+    Controller.prototype.renderMessage = function (message){
+        newMessage = document.createElement('div');
+        newMessage.id = 'message';
+        newMessage.innerHTML = message;
+        viewElement = document.querySelector('#viewport');
+        viewElement.appendChild(newMessage);
+        console.log(viewport)
+        setTimeout(() => {
+            viewport.removeChild(newMessage);
+        }, 2000)
+        console.log(viewport);
     };
     Controller.prototype.renderPorts = function renderPorts(ports){
         const portsElement = document.querySelector('#ports');
@@ -40,30 +51,40 @@
         const shipElement = document.querySelector('#ship');
         shipElement.style.top = `${portElement.offsetTop + 32}px`;
         shipElement.style.left = `${portElement.offsetLeft - 100}px`;
-        shipElement.appendChild(shipElement);
     }
-    Controller.prototype.setSail = function setSail(){
+    Controller.prototype.setSail = function () {
         const ship = this.ship
         const currentPortIndex = ship.itinerary.ports.indexOf(ship.currentPort);
         const nextPortIndex = currentPortIndex + 1;
-        const nextPortElement = document.querySelector(`[data-port-index='${shipPortIndex}']`);
+        const nextPortElement = document.querySelector(`[data-port-index='${nextPortIndex}']`);
+        if(!nextPortElement) {
+            this.renderMessage(`${ship.currentPort.name} is the end of the line`);
+            stopShip();
+        };
+        this.renderMessage(`Now departing ${ship.currentPort.name}`);
         const shipElement = document.querySelector('#ship');
         const sailInterval = setInterval(() => {
-            const shipLeft = parseInt(shipElement.style.left, 20);
-            if (shipLeft === (nextPortElement.left - 32)) {
+            const shipLeft = parseInt(shipElement.style.left, 10);
+          /* if (!nextPortElement){
+               stopShip();
+               return alert('End of the line!');
+           }*/
+           //the code below allows us to act almost like a console log and function
+           //rolled into 1. we use (``) to open and close the statement,
+           //inside we add what we want console logged out
+           //we then seperate any calls to functions using ${methods}
+           //this.renderMessage(`Now departing ${ship.currentPort.name}`);
+            if (shipLeft === (nextPortElement.offsetLeft - 80)) {
                 ship.setSail();
                 ship.dock();
+                this.renderMessage(`Now docking in ${ship.currentPort.name}`);
                 clearInterval(sailInterval);
             }
             shipElement.style.left = `${shipLeft + 1}px`;
         }, 20);
-        if(!nextPortElement){
-            return alert('End of the line!');
+        function stopShip() {
+            clearInterval(sailInterval);
         }
-    }
-
-    Controller.prototype.renderMessage = function renderMessage(message){
-
     }
     if (typeof module !== 'undefined' && module.exports){
         module.exports = Controller;
