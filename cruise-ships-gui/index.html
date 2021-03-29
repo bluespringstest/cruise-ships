@@ -6,6 +6,17 @@
     <link rel="stylesheet" href="styles.css">
     <title>Cruise Ships</title>
 </head>
+<header>
+    <div class="HUD" id="HUD1"><p></p> </div>
+    <div class="HUD" id="HUD2"><q></q></div>
+</header>
+<form name="newPorts" action="#" method="POST">
+    <div class="container">
+        <label for="newPort"><b>Add Port</b></label>
+        <input type="text" placeholder="Port Name" name="newPort" id="newPort">
+        <button type="submit" class="addbtn">Add</button>
+    </div>
+</form>
 <body>
     <div id="viewport">
         <div id="ports"></div>
@@ -29,6 +40,6 @@
     controller.renderPorts(itinerary.ports);
     controller.renderPorts(itinerary.ports);
     controller.renderShip(itinerary.ship);
-    </script>  
+    </script> 
 </body>
 </html>

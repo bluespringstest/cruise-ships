@@ -13,7 +13,7 @@ body {
 #viewport {
     width: 640px;
     height: 256px;
-    position: relative;
+    position:absolute;
     overflow-x: auto;
     background-image: url('../cruise-ships-gui/images/water0.png');
 }
@@ -67,4 +67,42 @@ body {
     bottom: 0;
     background-color: rgb(18, 214, 204);
     padding-top: 14px;
+}
+
+.HUD {
+    position: relative;
+    margin-top: 0px;
+    margin-right: auto;
+    margin-bottom: 0px;
+    margin-left:initial;
+    top: -350px;
+    right: auto;
+    left: 54vmax;
+    width: fit-content;
+    color: white;
+    text-align:center;
+}
+
+form {
+    box-sizing: flex;
+    position: relative;
+    margin-bottom: 0%;
+    margin-left:0%;
+    left: -650px;
+    right: 100px;
+    top: -350px;
+    border-width: 0px;
+    text-align: left;
+    color: white;
+    font-family: 'Press Start 2p', cursive;
+}
+
+form > div.container{
+    padding: 6px;
+}
+
+button{
+    background-color: red;
+    font-family: 'Press Start 2p', cursive;
+    color: white;
 }
