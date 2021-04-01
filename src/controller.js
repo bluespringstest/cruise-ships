@@ -68,7 +68,7 @@
         this.renderMessage(`Now departing ${ship.currentPort.name}`);
         console.log(nextPortElement);
         const shipElement = document.querySelector('#ship');
-        const nextPort = ship.itinerary.ports[nextPortIndex + 1];
+        const nextPort = ship.itinerary.ports[nextPortIndex];
         const sailInterval = setInterval(() => {
             const shipLeft = parseInt(shipElement.style.left, 10);
            //the code below allows us to act almost like a console log and function
