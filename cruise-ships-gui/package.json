@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/bluespringstest/GitHub/issues"
   },
-  "homepage": "https://github.com/bluespringstest/GitHub#readme"
+  "homepage": "https://github.com/bluespringstest/GitHub#readme",
+  "dependencies": {
+    "jest": "^26.6.3"
+  }
 }

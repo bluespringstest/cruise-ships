@@ -38,8 +38,25 @@
     const ship = new Ship(itinerary);
     const controller = new Controller(ship);
     controller.renderPorts(itinerary.ports);
-    controller.renderPorts(itinerary.ports);
     controller.renderShip(itinerary.ship);
+    /*document.querySelector('form').addEventListener(
+            'submit', (event) => {
+                event.preventDefault();
+                const formData = new FormData(document.querySelector('form'))
+                for (let pair of formData.entries()){
+                    r = new Port(pair[1]);
+                    itinerary.ports.push(r);
+                    /*p = ship.itinerary.ports.length;
+                    const portsElement = document.querySelector('#ports');
+                    let l = document.createElement('div');
+                    l.setAttribute("class", "port");
+                    l.setAttribute("data-port-name", pair[1]);
+                    l.setAttribute("data-port-index", p);
+                    portsElement.appendChild(l);
+                    controller.renderPorts(itinerary.ports); 
+                    controller.renderShip(itinerary.ship);                 
+                }
+            });*/
     </script> 
 </body>
 </html>

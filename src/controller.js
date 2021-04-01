@@ -2,7 +2,7 @@
     function Controller(ship){
         this.ship = ship,
         this.initialiseSea();
-        this.go = document.querySelector('#sailbutton').addEventListener
+        document.querySelector('#sailbutton').addEventListener
         ('click', () => {
             this.setSail();
         });
@@ -65,19 +65,12 @@
         const currentPortIndex = ship.itinerary.ports.indexOf(ship.currentPort);
         const nextPortIndex = currentPortIndex + 1;
         const nextPortElement = document.querySelector(`[data-port-index='${nextPortIndex}']`);
-        if(!nextPortElement) {
-            this.renderMessage(`${ship.currentPort.name} is the end of the line`);
-            stopShip();
-        };
         this.renderMessage(`Now departing ${ship.currentPort.name}`);
+        console.log(nextPortElement);
         const shipElement = document.querySelector('#ship');
         const nextPort = ship.itinerary.ports[nextPortIndex + 1];
         const sailInterval = setInterval(() => {
             const shipLeft = parseInt(shipElement.style.left, 10);
-          /* if (!nextPortElement){
-               stopShip();
-               return alert('End of the line!');
-           }*/
            //the code below allows us to act almost like a console log and function
            //rolled into 1. we use (``) to open and close the statement,
            //inside we add what we want console logged out
@@ -87,31 +80,22 @@
                 ship.setSail();
                 ship.dock();
                 this.renderMessage(`Now docking in ${ship.currentPort.name}`);
-                this.hud(`Current Port: ${ship.currentPort.name}`, `Next Port: ${nextPort.name}`);
-                console.log(this.hud);
                 clearInterval(sailInterval);
+                this.hud(`Current Port: ${ship.currentPort.name}`, `Next Port: ${nextPort.name}`);
+
             }
             shipElement.style.left = `${shipLeft + 1}px`;
         }, 20);
-        function stopShip() {
-            clearInterval(sailInterval);
-        }
-        /*this.newPorts = document.querySelector('form');
-        this.newPorts.addEventListener('submit', event => {
-            event.preventDefault();
-            const formData = new FormData(document.querySelector('form'))
-            for (let pair of formData.entries())
-            newPort =  document.querySelector('#ports');
-            const newPortElement = document.createElement('div');
-            newPortElement.className = 'port';
-            newPortElement.dataset.portName = port.name = pair[1];
-            newPortElement.dataset.portIndex = index;
-            newPort.appendChild(newPortElement);
-            {
-                console.log(pair[1]);
-            }
-            console.log("Cancel success");
-        })*/
+        if (nextPort.name === null){
+            this.renderMessage(`${ship.currentPort.name} is the end of the line`);
+               stopShip(sailInterval);
+               return alert('End of the line!');
+           }
+           else {
+               this.hud(`Current Port: ${ship.currentPort.name}`, `Next Port: ${nextPort.name}`);}
+    }
+    function stopShip() {
+        clearInterval(sailInterval);
     }
     if (typeof module !== 'undefined' && module.exports){
         module.exports = Controller;
